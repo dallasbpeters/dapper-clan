@@ -1,0 +1,33 @@
+{
+  "locals": {
+    "url": "http://localhost:8080",
+    "name": "Team Dapper",
+    "owner": "The Dapper Clan",
+    "description": "'cause that's fly yo."
+  },
+  "plugins": [
+    "./plugins/paginator.coffee",
+    "wintersmith-livereload",
+    "wintersmith-sassify"
+  ],
+  "sassify": {
+    "outputStyle": "compressed",
+    "sourceComments": "false",
+    "sourceMap": true
+  },
+  "require": {
+    "moment": "moment",
+    "_": "underscore",
+    "typogr": "typogr"
+  },
+  "jade": {
+    "pretty": true
+  },
+  "markdown": {
+    "smartLists": true,
+    "smartypants": true
+  },
+  "paginator": {
+    "perPage": 3
+  }
+}
