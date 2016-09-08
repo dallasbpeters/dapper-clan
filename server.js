@@ -54,7 +54,6 @@ server.route({
     path:'/',
     handler: function (request, reply) {
 
-        return reply('test');
         return reply(data).type('application/json; charset=utf-8');
     }
 });
