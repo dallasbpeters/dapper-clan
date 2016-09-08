@@ -51,10 +51,13 @@ setInterval(getData, 15 * 60 * 1000);
 // Add the route
 server.route({
     method: 'GET',
-    path:'/',
+    path: '/',
+    config: {
+      cors: true
+    },
     handler: function (request, reply) {
 
-        return reply(data).type('application/json; charset=utf-8');
+        return reply(data);
     }
 });
 
