@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/dallasbpeters/dapper-clan#readme",
   "dependencies": {
+    "hapi": "^15.0.3",
+    "node-fetch": "^1.6.0",
     "whatwg-fetch": "^1.0.0"
   }
 }
