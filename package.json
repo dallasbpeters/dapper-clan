@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "wintersmith build",
+    "preview": "wintersmith preview",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,11 +20,14 @@
   "homepage": "https://github.com/dallasbpeters/dapper-clan#readme",
   "dependencies": {
     "hapi": "^15.0.3",
-    "node-fetch": "^1.6.0",
-    "whatwg-fetch": "^1.0.0",
     "moment": "2.3.x",
+    "node-fetch": "^1.6.0",
+    "typogr": "0.5.x",
     "underscore": "1.4.x",
-    "typogr": "0.5.x"
+    "whatwg-fetch": "^1.0.0",
+    "wintersmith": "^2.3.2",
+    "wintersmith-livereload": "^0.2.2",
+    "wintersmith-sassify": "^1.0.0"
   },
   "private": "true"
 }
