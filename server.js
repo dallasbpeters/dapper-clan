@@ -13,7 +13,7 @@ let data = {};
 
 function getData() {
   fetch(
-      'https://www.bungie.net/Platform/Group/1520166',
+      'https://www.bungie.net/Platform/Group/485457',
       {
         headers: {
           'X-API-Key': '10E792629C2A47E19356B8A79EEFA640'
@@ -29,7 +29,7 @@ function getData() {
     });
 
   fetch(
-      'https://www.bungie.net/Platform/Group/1520166/MembersV3/?lc=en&fmt=true&lcin=true&currentPage=1',
+      'https://www.bungie.net/Platform/Group/485457/MembersV3/?lc=en&fmt=true&lcin=true&currentPage=1',
       {
         headers: {
           'X-API-Key': '10E792629C2A47E19356B8A79EEFA640'
