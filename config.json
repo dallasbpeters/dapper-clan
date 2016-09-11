@@ -23,6 +23,7 @@
   },
   "browserify": {
       "transforms": [
+          "babelify",
           "reactify"
       ],
       "extensions": [

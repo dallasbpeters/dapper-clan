@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/dallasbpeters/dapper-clan#readme",
   "dependencies": {
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babelify": "^7.3.0",
     "hapi": "^15.0.3",
     "moment": "2.3.x",
     "node-fetch": "^1.6.0",
