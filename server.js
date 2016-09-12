@@ -11,6 +11,7 @@ server.connection({
 
 let data = {};
 
+// Get clan info
 function getData() {
   fetch(
       'https://www.bungie.net/Platform/Group/485457',
@@ -22,12 +23,16 @@ function getData() {
     )
     .then(function(response) {
       return response.json()
-    }).then(function(json) {
+    })
+    .then(function(json) {
       data.clan = json
-    }).catch(function(ex) {
+    })
+    .catch(function(ex) {
       console.log('response parsing failed', ex)
     });
 
+
+  // Get member stuff
   fetch(
       'https://www.bungie.net/Platform/Group/485457/MembersV3/?lc=en&fmt=true&lcin=true&currentPage=1',
       {
@@ -38,11 +43,37 @@ function getData() {
     )
     .then(function(response) {
       return response.json()
-    }).then(function(json) {
+    })
+    .then(function(json) {
       data.members = json
-    }).catch(function(ex) {
+      return json;
+    })
+    .then((json) => {
+      const firstMember = json.Response.results[0];
+      console.log('firstMember', firstMember);
+
+      const url = `https://www.bungie.net/Platform/User/GetBungieAccount/${firstMember.membershipId}/${firstMember.membershipType}/`;
+      console.log(url);
+      return fetch(
+          // `https://www.bungie.net/Platform/Destiny/2/Account/4611686018428939884/Summary/`,
+          url,
+          {
+            headers: {
+              'X-API-Key': '7336c6e6af554f6dae06ff1651a132d5'
+            }
+          }
+        )
+    })
+    .then(function(response) {
+      return response.json()
+    })
+    .then((data) => {
+      console.log('member', data);
+    })
+    .catch(function(ex) {
       console.log('response parsing failed', ex)
     });
+
 }
 getData();
 setInterval(getData, 15 * 60 * 1000);
