@@ -51,8 +51,18 @@ function getData() {
     .then((json) => {
       const firstMember = json.Response.results[0];
       console.log('firstMember', firstMember);
+      const url = `https://www.bungie.net/Platform/Destiny/SearchDestinyPlayer/${firstMember.memberType}/${firstMember.user.psnDisplayName}`;
 
-      const url = `https://www.bungie.net/Platform/User/GetBungieAccount/${firstMember.membershipId}/${firstMember.membershipType}/`;
+      // Some fancy pants end points...
+      // /Platform/Destiny/2/Account/4611686018448728582/?lc=en
+      // Gimoire Score /Platform/Destiny/Vanguard/Grimoire/2/4611686018456164936/?single=110012&lc=en
+
+      // Another thing I think would be rad would be to setup a clan variable so that I/we could potentially open source this for other clans to start up their own. Not sure where that variable lives but it would be nice to just switch a config variable and load in a totally different clan!
+
+      // Remind me to talk to you about /player/{membershipId} which is found at
+      // https://github.com/DestinyTrialsReport/DestinyTrialsReport/blob/develop/app/shared/services/api.js:13
+      // and a screenshot: https://www.dropbox.com/s/j7bn2at519sp7wq/Screenshot%202016-09-12%2015.34.54.png?dl=0
+
       console.log(url);
       return fetch(
           // `https://www.bungie.net/Platform/Destiny/2/Account/4611686018428939884/Summary/`,
