@@ -1,7 +1,13 @@
 'use strict';
 
 const fetch = require('node-fetch');
+const clan = require('./lib/clan');
+const member = require('./lib/member');
 const Hapi = require('hapi');
+
+const getClanData = clan.getClanData;
+const getClanMembers = clan.getClanMembers;
+const getMemberData = member.getMemberData;
 
 // Create a server with a host and port
 const server = new Hapi.Server();
@@ -9,79 +15,30 @@ server.connection({
     port: process.env.app_port || 8080
 });
 
+// Used to cache user data, which is refreshed every 15 minutes.
 let data = {};
 
 // Get clan info
 function getData() {
-  fetch(
-      'https://www.bungie.net/Platform/Group/485457',
-      {
-        headers: {
-          'X-API-Key': '7336c6e6af554f6dae06ff1651a132d5'
-        }
-      }
-    )
-    .then(function(response) {
-      return response.json()
+    getClanData('485457')
+    .then(function(clanData) {
+      data.clan = clanData
     })
-    .then(function(json) {
-      data.clan = json
-    })
-    .catch(function(ex) {
-      console.log('response parsing failed', ex)
+    .catch(function(err) {
+      console.log('Problem getting clan data', err);
     });
 
-
-  // Get member stuff
-  fetch(
-      'https://www.bungie.net/Platform/Group/485457/MembersV3/?lc=en&fmt=true&lcin=true&currentPage=1',
-      {
-        headers: {
-          'X-API-Key': '7336c6e6af554f6dae06ff1651a132d5'
-        }
-      }
-    )
-    .then(function(response) {
-      return response.json()
+    getClanMembers('485457')
+    .then((memberData) => {
+      const members = memberData.Response.results;
+      const memberPromises = members.map((member) => getMemberData(member));
+      return Promise.all(memberPromises);
     })
-    .then(function(json) {
-      data.members = json
-      return json;
+    .then(function(members) {
+      data.members = members;
     })
-    .then((json) => {
-      const firstMember = json.Response.results[0];
-      console.log('firstMember', firstMember);
-      const url = `https://www.bungie.net/Platform/Destiny/SearchDestinyPlayer/${firstMember.memberType}/${firstMember.user.psnDisplayName}`;
-
-      // Some fancy pants end points...
-      // /Platform/Destiny/2/Account/4611686018448728582/?lc=en
-      // Gimoire Score /Platform/Destiny/Vanguard/Grimoire/2/4611686018456164936/?single=110012&lc=en
-
-      // Another thing I think would be rad would be to setup a clan variable so that I/we could potentially open source this for other clans to start up their own. Not sure where that variable lives but it would be nice to just switch a config variable and load in a totally different clan!
-
-      // Remind me to talk to you about /player/{membershipId} which is found at
-      // https://github.com/DestinyTrialsReport/DestinyTrialsReport/blob/develop/app/shared/services/api.js:13
-      // and a screenshot: https://www.dropbox.com/s/j7bn2at519sp7wq/Screenshot%202016-09-12%2015.34.54.png?dl=0
-
-      console.log(url);
-      return fetch(
-          // `https://www.bungie.net/Platform/Destiny/2/Account/4611686018428939884/Summary/`,
-          url,
-          {
-            headers: {
-              'X-API-Key': '7336c6e6af554f6dae06ff1651a132d5'
-            }
-          }
-        )
-    })
-    .then(function(response) {
-      return response.json()
-    })
-    .then((data) => {
-      console.log('member', data);
-    })
-    .catch(function(ex) {
-      console.log('response parsing failed', ex)
+    .catch(function(err) {
+      console.log('Problem getting member data', err);
     });
 
 }
