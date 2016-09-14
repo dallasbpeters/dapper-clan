@@ -12,7 +12,7 @@ const getMemberData = member.getMemberData;
 // Create a server with a host and port
 const server = new Hapi.Server();
 server.connection({
-    port: process.env.app_port || 8080
+    port: process.env.app_port || 8081
 });
 
 // Used to cache user data, which is refreshed every 15 minutes.
@@ -36,6 +36,7 @@ function getData() {
     })
     .then(function(members) {
       data.members = members;
+      console.log('\n\ngetData finished');
     })
     .catch(function(err) {
       console.log('Problem getting member data', err);
