@@ -3,6 +3,8 @@ import React from '../../node_modules/react';
 import ReactDOM from 'react-dom';
 import 'whatwg-fetch';
 
+console.log('here', document.getElementById('data'));
+
 // Go get the data, and if it comes through ok, display it with React
 fetch('http://dapper.cloudno.de/')
   .then(function(response) {
@@ -10,13 +12,11 @@ fetch('http://dapper.cloudno.de/')
   })
 
   .then((data) => {
-    const members = data.members && data.members.Response
-      ? data.members.Response.results
+    const members = data.members || [];
+    const clan = data.clan
+      ? data.clan.Response
       : [];
-    const clan = data.clan && data.clan.Response
-      ? data.clan.Response.results
-      : [];
-    console.log(members);
+    console.log(members, clan);
 
     ReactDOM.render(
       <Main members={members} clan={clan} />,
