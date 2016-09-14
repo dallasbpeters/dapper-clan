@@ -7,7 +7,7 @@ const Member = ({ member }) => {
 
   return (
     <li>
-      { /* <img className="member_avatar" src={`http://bungie.net/${member.user.profilePicturePath}`} alt="member avatar"/> */ }
+      <img className="member_avatar" src={`http://bungie.net/${member.user.profilePicturePath}`} alt="member avatar"/>
       <span className="member_name">{member.displayName}</span>
 
     </li>
