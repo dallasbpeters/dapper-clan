@@ -20,7 +20,7 @@ fetch('http://dapper.cloudno.de/')
 
     ReactDOM.render(
       <Main members={members} clan={clan} />,
-      document.getElementById('data')
+      document.getElementById('team')
     );
   })
 
