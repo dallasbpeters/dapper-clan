@@ -1,0 +1,41 @@
+h1, h2, h3, h4, h5, h6, p, body, a, img, ul, ol, blockquote, pre {
+  margin: 0; padding: 0; border: 0;
+}
+
+body {
+  font-family: 'Lora', serif;
+  font-size: 21px;
+  line-height: 1.52;
+  background-color: #f8f8f8;
+  text-rendering: optimizeLegibility;
+}
+
+body, a {
+  color: #171717;
+}
+
+a:hover {
+  color: #ff8000;
+  text-decoration: underline;
+}
+
+p {
+  margin-bottom: 1.52em;
+}
+
+pre {
+  font-size: 0.9em;
+  overflow: auto;
+  background: #fff;
+  border: 1px dashed #d2d2d2;
+  border-radius: 0.25em;
+  margin-bottom: 1.8em;
+  padding: 1em;
+}
+
+hr {
+  border: 0;
+  border-top: 1px dashed #d2d2d2;
+  height: 0;
+  margin: 1.6em 0;
+}
