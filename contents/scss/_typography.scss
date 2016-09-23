@@ -1,3 +1,15 @@
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 21px;
+  line-height: 1.52;
+}
+
+h1, h2, h3, h4, h5, h6, p, body, a, img, ul, ol, blockquote, pre {
+  margin: 0; padding: 0; border: 0;
+}
+
+
+// Headings
 h1 {
   font-size: 2em;
   margin-bottom: 1em;
@@ -17,6 +29,21 @@ h3 {
   font-size: 1.4em;
   margin-top: 1.8em;
   margin-bottom: 0.8em;
+}
+
+
+// Links
+body, a {
+  color: #171717;
+}
+
+a:hover {
+  color: #ff8000;
+  text-decoration: underline;
+}
+
+p {
+  margin-bottom: 1.52em;
 }
 
 ol, ul {
